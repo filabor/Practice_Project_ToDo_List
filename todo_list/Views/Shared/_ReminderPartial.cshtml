@@ -1,0 +1,79 @@
+﻿@model IEnumerable<todo_list.Models.TaskToDo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@{
+    ViewData["TaskID"] = "TaskID";
+}
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfTask)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Place)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+
+            int days_left = (item.DateOfTask - DateTime.Today).Days;
+            <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskName)
+            </td>
+                @if (days_left == 1)
+                {
+                    <td style="background-color: yellow">
+                        @Html.DisplayFor(modelItem => item.DateOfTask)
+                    </td>
+                } else if (item.DateOfTask <= DateTime.Today)
+                {
+                    <td style="background-color: red">
+                        @Html.DisplayFor(modelItem => item.DateOfTask)
+                    </td>
+                } else
+                {
+                     <td style="background-color: green">
+                        @Html.DisplayFor(modelItem => item.DateOfTask)
+                     </td>
+                }
+                <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Place)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id= item.TaskID }) |
+                @Html.ActionLink("Details", "Details", new { id= item.TaskID }) |
+                @Html.ActionLink("Delete", "Delete", new { id= item.TaskID })
+            </td>
+            <td>
+                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

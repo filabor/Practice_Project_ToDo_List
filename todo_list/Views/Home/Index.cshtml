@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Tasks Organizer</h1>
+    <p>Start with organization! </p>
+</div>
+
+<p class="text-center">
+    <a asp-area="" asp-controller="TaskToDo" asp-action="Create">Create New Task</a>
+</p>
+ 
+<partial name="_ReminderPartial" view-data="ViewData" />
